@@ -59,7 +59,7 @@ class PlaylistController extends Controller
             'artiste_id' => $request->artiste_id
         ]);
 
-        return redirect()->route('index');
+        return redirect()->route('playlist.index');
     }
 
     /**
@@ -81,7 +81,9 @@ class PlaylistController extends Controller
      */
     public function edit(Playlist $playlist)
     {
-        //
+        return Inertia::render('Playlist/Edit',[
+            'playlist' => $playlist
+        ]);
     }
 
     /**
@@ -93,7 +95,23 @@ class PlaylistController extends Controller
      */
     public function update(UpdatePlaylistRequest $request, Playlist $playlist)
     {
-        //
+        $request->validate([
+            'nom' => 'required',
+            'description' => 'required',
+            'image' => 'required',
+            'is_public' => 'nullable',
+            'artiste_id' => 'required'
+        ]);
+
+        $playlist->update([
+            'nom' => $request->nom,
+            'description' =>$request->description,
+            'image' => $request->image,
+            'is_public' => $request->is_public,
+            'artiste_id' => $request->artiste_id
+        ]);
+
+        return redirect()->route('playlist.index');
     }
 
     /**

@@ -27,7 +27,7 @@
             <option value="0">Privé</option>
         </select>
 
-<button type="submit" @submit="redirectForm">Ajouter playlist</button>
+<button type="submit">Ajouter playlist</button>
 
 
 
@@ -46,6 +46,7 @@ export default{
             form : this.$inertia.form({
                 nom: '',
                 description: '',
+                artiste_id : '',
                 image: '',
                 is_public: '',
             })
@@ -55,9 +56,6 @@ export default{
     methods: {
         sendForm(){
             this.form.post(route('playlist.store'))
-        },
-        redirectForm(){
-            this.$router.push({ name: "playlist"})
         }
     }
 }
